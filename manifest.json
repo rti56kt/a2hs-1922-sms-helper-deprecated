@@ -3,17 +3,17 @@
     "name": "QR Code Scanner (offline supported)",
     "icons": [
       {
-        "src": "/images/icons/logo-192.png",
+        "src": "/a2hs-qrscanner/images/icons/logo-192.png",
         "sizes": "192x192"
       },
       {
-        "src": "/images/icons/logo-512.png",
+        "src": "/a2hs-qrscanner/images/icons/logo-512.png",
         "sizes": "512x512"
       }
     ],
     "start_url": "/a2hs-qrscanner/index.html",
     "background_color": "#3367D6",
     "display": "standalone",
-    "scope": "/",
+    "scope": "/a2hs-qrscanner",
     "theme_color": "#3367D6"
 }
