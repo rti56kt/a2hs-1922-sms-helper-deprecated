@@ -4,6 +4,9 @@ const cacheResources = [
     '/a2hs-qrscanner/index.html',
     '/a2hs-qrscanner/js/main.js',
     '/a2hs-qrscanner/js/app/instascan.min.js',
+    '/a2hs-qrscanner/images/logo.svg',
+    '/a2hs-qrscanner/images/icons/logo-192.png',
+    '/a2hs-qrscanner/images/icons/logo-512.png',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js',
     'https://code.jquery.com/jquery-3.6.0.slim.min.js'

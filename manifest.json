@@ -11,9 +11,9 @@
         "sizes": "512x512"
       }
     ],
-    "start_url": "/a2hs-qrscanner/index.html",
+    "start_url": "/a2hs-qrscanner/",
     "background_color": "#3367D6",
     "display": "standalone",
-    "scope": "/a2hs-qrscanner",
+    "scope": "/a2hs-qrscanner/",
     "theme_color": "#3367D6"
 }
