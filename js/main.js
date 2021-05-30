@@ -7,32 +7,34 @@ if('serviceWorker' in navigator) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
+    console.log(navigator.userAgent);
     var installPromptEvent;
     var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
 
     scanner.addListener('scan', function (content) {
         $('#scanModal').modal('show');
-        $('#scanModalModalContent').text(content);
+        $('#scanModalContent').text(content);
 
         var checkurl = /^((https?|http?|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
         var checksms = /^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/;
 
         if(checkurl.test(content)) {
+            $('#scanModalPrimaryBtn').removeClass('d-none');
             $('#scanModalPrimaryBtn').text('Redirect');
             $('#scanModalPrimaryBtn').click( function() {
                 location.href = newc;
             });
-            // window.open(content, '_self');
-        }
-
-        if(checksms.test(content)) {
+        }else if(checksms.test(content)) {
             let phonenum = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.*\n.*)$/, '$2');
             let smsbody = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/, '$3');
-            let newc = 'sms:' + phonenum + '?body=' + encodeURIComponent(smsbody);
+            let newc = 'sms:' + phonenum + ';?&body=' + encodeURIComponent(smsbody);
+            $('#scanModalPrimaryBtn').removeClass('d-none');
             $('#scanModalPrimaryBtn').text('Open SMS App');
             $('#scanModalPrimaryBtn').click(function() {
                 location.href = newc;
             });
+        }else{
+            $('#scanModalPrimaryBtn').addClass('d-none');
         }
     });
 
