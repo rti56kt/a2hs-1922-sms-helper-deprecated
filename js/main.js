@@ -11,15 +11,15 @@ window.addEventListener('DOMContentLoaded', function() {
     var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
 
     scanner.addListener('scan', function (content) {
-        $('#exampleModal').modal('show');
-        $('#ModalContent').text(content);
+        $('#scanModal').modal('show');
+        $('#scanModalModalContent').text(content);
 
         var checkurl = /^((https?|http?|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
         var checksms = /^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/;
 
         if(checkurl.test(content)) {
-            $('#PrimaryBtn').text('Redirect');
-            $('#PrimaryBtn').click( function() {
+            $('#scanModalPrimaryBtn').text('Redirect');
+            $('#scanModalPrimaryBtn').click( function() {
                 location.href = newc;
             });
             // window.open(content, '_self');
@@ -29,8 +29,8 @@ window.addEventListener('DOMContentLoaded', function() {
             let phonenum = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.*\n.*)$/, '$2');
             let smsbody = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/, '$3');
             let newc = 'sms:' + phonenum + '?body=' + encodeURIComponent(smsbody);
-            $('#PrimaryBtn').text('Open SMS App');
-            $('#PrimaryBtn').click(function() {
+            $('#scanModalPrimaryBtn').text('Open SMS App');
+            $('#scanModalPrimaryBtn').click(function() {
                 location.href = newc;
             });
         }
@@ -49,19 +49,23 @@ window.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('beforeinstallprompt', function(event) {
         event.preventDefault();
         installPromptEvent = event;
+        $('#downloadBtn').removeClass('d-none');
         $('#downloadBtn').removeAttr('disabled');
     });
 
     window.addEventListener('appinstalled', function(event) {
-        $('#downloadBtn').hide();
+        $('#downloadBtn').addClass('d-none');
     });
 
     $('#downloadBtn').click(function() {
-        console.log('btn clicked');
         $('#downloadBtn').attr('disabled', '');
         if(installPromptEvent) {
             installPromptEvent.prompt();
             installPromptEvent = null;
         }
+    });
+
+    $('#infoBtn').click(function() {
+        $('#infoModal').modal('show');
     });
 });

@@ -8,6 +8,7 @@ const cacheResources = [
     '/a2hs-qrscanner/images/logo.svg',
     '/a2hs-qrscanner/images/icons/logo-192.png',
     '/a2hs-qrscanner/images/icons/logo-512.png',
+    'https://raw.githubusercontent.com/schmich/instascan/master/assets/qr.png',
     'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js',
