@@ -49,11 +49,19 @@ window.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('beforeinstallprompt', function(event) {
         event.preventDefault();
         installPromptEvent = event;
-        $('#downloadBtn').click(function() {
-            if(installPromptEvent) {
-                installPromptEvent.prompt();
-                installPromptEvent = null;
-            }
-        });
+        $('#downloadBtn').removeAttr('disabled');
+    });
+
+    window.addEventListener('appinstalled', function(event) {
+        $('#downloadBtn').hide();
+    });
+
+    $('#downloadBtn').click(function() {
+        console.log('btn clicked');
+        $('#downloadBtn').attr('disabled', '');
+        if(installPromptEvent) {
+            installPromptEvent.prompt();
+            installPromptEvent = null;
+        }
     });
 });
