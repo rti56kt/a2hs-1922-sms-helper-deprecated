@@ -2,6 +2,7 @@ const cacheName = 'cache-v1';
 const cacheResources = [
     '/a2hs-qrscanner/',
     '/a2hs-qrscanner/index.html',
+    '/a2hs-qrscanner/manifest.webmanifest',
     '/a2hs-qrscanner/js/main.js',
     '/a2hs-qrscanner/js/app/instascan.min.js',
     '/a2hs-qrscanner/images/logo.svg',
