@@ -1,6 +1,6 @@
 if('serviceWorker' in navigator) {
     window.addEventListener('DOMContentLoaded', function() {
-        navigator.serviceWorker.register('/a2hs-qrscanner/sw.js')
+        navigator.serviceWorker.register('/a2hs-1922-sms-helper/sw.js')
         .then(reg => console.log('😎 Service worker registered!', reg))
         .catch(err => console.error('😥 Service worker registration failed: ', err));
     });
