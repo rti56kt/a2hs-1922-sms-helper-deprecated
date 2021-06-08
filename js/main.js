@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     scanner.addListener('scan', function(content) {
         $('#scanModalMainBtn').off();
+        $('#scanModalMainBtn').removeClass();
 
         var checksms = /^(smsto?|SMSTO?):([0-9]+):(.+[\n]*.*)$/;
 
@@ -27,7 +28,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
             if(phonenum === "1922") {
                 $('#scanModalContent').text(content);
-                $('#scanModalMainBtn').addClass('btn-primary');
+                $('#scanModalMainBtn').addClass('btn btn-primary');
                 $('#scanModalMainBtn').text('打開簡訊App');
                 $('#scanModalMainBtn').click(function() {
                     location.href = newcontent;
@@ -35,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 $('#scanModal').modal('show');
             } else {
                 $('#scanModalContent').html('<div class="alert alert-danger" role="alert">⚠此則簡訊收件人並非1922，發送此簡訊可能會被收費。<br><span class="fs-6">如您認為這是誤報，您仍可點擊底下的"打開簡訊App"按鈕以傳送簡訊。</span></div>' + content);
-                $('#scanModalMainBtn').addClass('btn-danger');
+                $('#scanModalMainBtn').addClass('btn btn-danger');
                 $('#scanModalMainBtn').text('打開簡訊App');
                 $('#scanModalMainBtn').click(function() {
                     location.href = newcontent;
