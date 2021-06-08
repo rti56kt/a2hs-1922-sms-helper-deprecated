@@ -12,35 +12,36 @@ window.addEventListener('DOMContentLoaded', function() {
     var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
 
     scanner.addListener('scan', function(content) {
-        $('#scanModalPrimaryBtn').off();
-        $('#scanModal').modal('show');
-        $('#scanModalContent').text(content);
+        $('#scanModalMainBtn').off();
 
-        var checkurl = /^((https?|http?|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-        var checksms = /^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/;
+        var checksms = /^(smsto?|SMSTO?):([0-9]+):(.+[\n]*.*)$/;
 
-        if(checkurl.test(content)) {
-            $('#scanModalPrimaryBtn').removeClass('d-none');
-            $('#scanModalPrimaryBtn').text('Redirect');
-            $('#scanModalPrimaryBtn').click(function() {
-                location.href = content;
-            });
-        }else if(checksms.test(content)) {
+        if(checksms.test(content)) {
             let phonenum = null;
             let smsbody = null;
-            let newc = null;
+            let newcontent = null;
 
-            phonenum = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.*\n.*)$/, '$2');
-            smsbody = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/, '$3');
-            newc = 'sms:' + phonenum + ';?&body=' + encodeURIComponent(smsbody);
+            phonenum = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.+[\n]*.*)$/, '$2');
+            smsbody = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.+[\n]*.*)$/, '$3');
+            newcontent = 'sms:' + phonenum + ';?&body=' + encodeURIComponent(smsbody);
 
-            $('#scanModalPrimaryBtn').removeClass('d-none');
-            $('#scanModalPrimaryBtn').text('Open SMS App');
-            $('#scanModalPrimaryBtn').click(function() {
-                location.href = newc;
-            });
-        }else{
-            $('#scanModalPrimaryBtn').addClass('d-none');
+            if(phonenum === "1922") {
+                $('#scanModalContent').text(content);
+                $('#scanModalMainBtn').addClass('btn-primary');
+                $('#scanModalMainBtn').text('打開簡訊App');
+                $('#scanModalMainBtn').click(function() {
+                    location.href = newcontent;
+                });
+                $('#scanModal').modal('show');
+            } else {
+                $('#scanModalContent').html('<div class="alert alert-danger" role="alert">⚠此則簡訊收件人並非1922，發送此簡訊可能會被收費。<br><span class="fs-6">如您認為這是誤報，您仍可點擊底下的"打開簡訊App"按鈕以傳送簡訊。</span></div>' + content);
+                $('#scanModalMainBtn').addClass('btn-danger');
+                $('#scanModalMainBtn').text('打開簡訊App');
+                $('#scanModalMainBtn').click(function() {
+                    location.href = newcontent;
+                });
+                $('#scanModal').modal('show');
+            }
         }
     });
 
