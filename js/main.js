@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
 
     scanner.addListener('scan', function(content) {
+        $('#scanModalPrimaryBtn').off();
         $('#scanModal').modal('show');
         $('#scanModalContent').text(content);
 
