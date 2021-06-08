@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var installPromptEvent;
     var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
 
-    scanner.addListener('scan', function (content) {
+    scanner.addListener('scan', function(content) {
         $('#scanModal').modal('show');
         $('#scanModalContent').text(content);
 
@@ -21,13 +21,18 @@ window.addEventListener('DOMContentLoaded', function() {
         if(checkurl.test(content)) {
             $('#scanModalPrimaryBtn').removeClass('d-none');
             $('#scanModalPrimaryBtn').text('Redirect');
-            $('#scanModalPrimaryBtn').click( function() {
-                location.href = newc;
+            $('#scanModalPrimaryBtn').click(function() {
+                location.href = content;
             });
         }else if(checksms.test(content)) {
-            let phonenum = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.*\n.*)$/, '$2');
-            let smsbody = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/, '$3');
-            let newc = 'sms:' + phonenum + ';?&body=' + encodeURIComponent(smsbody);
+            let phonenum = null;
+            let smsbody = null;
+            let newc = null;
+
+            phonenum = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.*\n.*)$/, '$2');
+            smsbody = content.replace(/^(smsto?|SMSTO?):([0-9]+):(.+\n.*)$/, '$3');
+            newc = 'sms:' + phonenum + ';?&body=' + encodeURIComponent(smsbody);
+
             $('#scanModalPrimaryBtn').removeClass('d-none');
             $('#scanModalPrimaryBtn').text('Open SMS App');
             $('#scanModalPrimaryBtn').click(function() {
@@ -38,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    Instascan.Camera.getCameras().then(function (cameras) {
+    Instascan.Camera.getCameras().then(function(cameras) {
         if(cameras.length > 1) {
             scanner.start(cameras[1]);
         } else if(cameras.length === 1) {
